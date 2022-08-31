@@ -1,7 +1,6 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer
-from flask_cors import CORS
 from flask_migrate import Migrate
 
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
@@ -34,4 +33,39 @@ db_drop_and_create_all()
 # def db_drop_and_create_all():
 #     db.drop_all()
 #     db.create_all()
+
+
+######################################
+# MODELS
+######################################
+
+"""Post class"""
+class Post(db.Model):
+    __tablename__ = "posts"
+
+    post_id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    text = Column(String, nullable=False)
+
+    def __init__(self, title, text):
+        self.title = title
+        self.text = text
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        return {
+            "post_id": self.post_id,
+            "title": self.title,
+            "text": self.text
+        }
 
