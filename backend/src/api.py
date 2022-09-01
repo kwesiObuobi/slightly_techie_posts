@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, abort
+from flask import Flask, request, redirect, url_for, jsonify, abort
 from flask_cors import CORS
 from database.models import setup_db, Post
 
@@ -8,8 +8,7 @@ setup_db(app)
 
 @app.route('/')
 def index():
-    return "Smiley me => :)"
-
+    return redirect(url_for('create_post'))
 
 @app.route('/posts', methods=['POST'])
 def create_post():
@@ -32,7 +31,6 @@ def create_post():
         })
     except:
         abort(422)
-
 
 @app.route('/posts')
 def get_posts():
