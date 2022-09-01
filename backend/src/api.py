@@ -160,7 +160,7 @@ def not_found(error):
     }), 404
 
 @app.errorhandler(405)
-def not_found(error):
+def not_allowed(error):
     return jsonify({
         'success': False,
         'error': 405,
@@ -176,7 +176,7 @@ def unprocessable(error):
     }), 422
 
 @app.errorhandler(500)
-def not_found(error):
+def internal_server_error(error):
     return jsonify({
         'success': False,
         'error': 500,
