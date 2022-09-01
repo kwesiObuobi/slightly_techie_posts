@@ -3,9 +3,9 @@ from flask_cors import CORS
 from database.models import setup_db, Post
 
 app = Flask(__name__)
-CORS(app)
-# CORS(app, resources={r'*': {'origins': '*'}})
 setup_db(app)
+# CORS(app, resources={r'*': {'origins': '*'}})
+CORS(app)
 
 
 """
