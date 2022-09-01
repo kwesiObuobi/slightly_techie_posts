@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, abort
 from flask_cors import CORS
 from database.models import setup_db, Post
 
@@ -20,6 +20,22 @@ def get_posts():
         'posts': formatted_posts,
         'total_posts': len(formatted_posts)
     })
+
+
+@app.route('/posts/<int:post_id>')
+def get_specific_post(post_id):
+    post = Post.query.filter(Post.post_id==post_id).one_or_none()
+
+    try:
+        if post is None:
+            abort(404)
+        else:
+            return jsonify({
+                'success': True,
+                'post': post.format()
+            })
+    except Exception as e:
+        print(e)
 
 
 if __name__ == '__main__':
