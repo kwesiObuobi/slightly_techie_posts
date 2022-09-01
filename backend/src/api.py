@@ -61,11 +61,32 @@ def update_post(post_id):
 
         return jsonify({
             'success': True,
-            'updated_post_id': post.post_id
+            'updated_id': post.post_id
         })
     
     except:
         abort(400)
+
+
+"""
+Endpoint for deleting a post
+"""
+@app.route('/posts/<int:post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    try:
+        post = Post.query.filter(Post.post_id == post_id).one_or_none()
+
+        if post is None:
+            abort(404)
+        
+        post.delete()
+        return jsonify({
+            'success': True,
+            'deleted_id': post_id
+        })
+
+    except:
+        abort(422)
 
 
 """
