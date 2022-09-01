@@ -8,9 +8,9 @@
 
 * **Python 3.10** - Follow instructions to install the latest version of python 3 for your platform. Visit the [python docs](https://www.python.org/).
 
-* **Virtual Environment and PIP dependencies** - Virtual envrionements are recommended whenever python is being used for projects. This keeps your dependecies separate and organized for each project. Instructions for setting up a virual environment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+* **Virtual Environment and PIP dependencies** - Virtual envrionements are recommended whenever python is being used for projects. This keeps your dependencies separate and organized for each project. <br/>Navigate to the `/backend` directory, and follow the instructions from the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) to set up a virual environment for your platform, and activate it for this project.
 
-* **PIP Dependencies** - Once your virtual environment is set up and running, install the required dependencies by navigating to the `/backend` directory and running:
+* **PIP Dependencies** - Once your virtual environment is set up and running/active, install the required dependencies by navigating to the `/backend` directory and running:
 
 > **Note** - Ensure you are in your virtual environment.
 
@@ -19,6 +19,8 @@ pip install -r requirements.txt
 ```
 <br/>
 2. Set up the Database
+
+* PostgreSQL is the database for the project. Visit the official download [page](https://www.postgresql.org/download/) to install PostgreSQL for your platform.
 
 * With postgres running, create a database called `stdb`
 
@@ -36,7 +38,7 @@ Ensure you are within the `/backend` directory and you're working using your cre
 To run the server, execute:
 
 ```bash
-export FLASK_APP=flaskr
+export FLASK_APP=src/api.py
 export FLASK_DEBUG=True
 export FLASK_ENV=development
 flask run --reload
