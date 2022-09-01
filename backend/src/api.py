@@ -6,10 +6,15 @@ app = Flask(__name__)
 CORS(app)
 setup_db(app)
 
+
 @app.route('/')
 def index():
     return redirect(url_for('create_post'))
 
+
+"""
+Endpoint for creating posts
+"""
 @app.route('/posts', methods=['POST'])
 def create_post():
     body = request.get_json()
@@ -32,6 +37,10 @@ def create_post():
     except:
         abort(422)
 
+
+"""
+Endpoint for viewing all posts
+"""
 @app.route('/posts')
 def get_posts():
     posts = Post.query.all()
@@ -44,6 +53,9 @@ def get_posts():
     })
 
 
+"""
+Endpoint for viewing a single post
+"""
 @app.route('/posts/<int:post_id>')
 def get_specific_post(post_id):
     post = Post.query.filter(Post.post_id==post_id).one_or_none()
