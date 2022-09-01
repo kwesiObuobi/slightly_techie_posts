@@ -29,10 +29,17 @@ def setup_db(app):
 db_drop_and_create_all()
     drops the database tables and starts fresh
     can be used to initialize a clean database
+    NOTE: You should uncomment the below code on first run;
+        to get the database freshly setup, and with an initial
+        database record
 """
 # def db_drop_and_create_all():
 #     db.drop_all()
 #     db.create_all()
+
+#     # create a demo post for testing purposes
+#     demo_post = Post(title="Slightly Techie", text="This is just a team of devs trying to be better")
+#     demo_post.insert()
 
 
 ######################################

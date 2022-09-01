@@ -4,9 +4,25 @@ from database.models import setup_db, Post
 
 app = Flask(__name__)
 CORS(app)
+# CORS(app, resources={r'*': {'origins': '*'}})
 setup_db(app)
 
 
+"""
+Use the after_request decorator to set Access-Control-Allow.
+List of all HTTP request header values the server will allow
+List of all HTTP request types allowed on these backend resources
+"""
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE')
+    return response
+
+
+"""
+Home route. Redirected to the endpoint which retrieves all posts
+"""
 @app.route('/')
 def index():
     return redirect(url_for('create_post'))
