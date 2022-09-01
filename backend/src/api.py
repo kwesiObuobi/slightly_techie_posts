@@ -39,6 +39,36 @@ def create_post():
 
 
 """
+Endpoint for updating a post
+"""
+@app.route('/posts/<int:post_id>', methods=['PATCH'])
+def update_post(post_id):
+    body = request.get_json()
+
+    try:
+        post = Post.query.filter(Post.post_id == post_id).one_or_none()
+        
+        if post is None:
+            abort(404)
+
+        if 'title' in body:
+            post.title = body.get('title')
+        
+        if 'text' in body:
+            post.text = body.get('text')
+
+        post.update()
+
+        return jsonify({
+            'success': True,
+            'updated_post_id': post.post_id
+        })
+    
+    except:
+        abort(400)
+
+
+"""
 Endpoint for viewing all posts
 """
 @app.route('/posts')
