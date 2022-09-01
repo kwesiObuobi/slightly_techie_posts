@@ -28,7 +28,8 @@ pip install -r requirements.txt
 createbd stdb
 ```
 
-* In `/backend/database/models.py`, uncomment the `db_drop_and_create_all()` method which creates `posts` table in the database, and inserts a single record for demo/testing purposes. After a first successful run of the project, you should go back and comment out the `db_drop_and_create_all()` method in order to save your new record inserts.
+* In `/backend/database/models.py`, uncomment the `db_drop_and_create_all()` method within the `setup_db(app)` method. This creates `posts` table in the database, and inserts a single record for demo/testing purposes. 
+> **Note** - After a first successful run of the server, you should go back and comment out the `db_drop_and_create_all()` method in order to save your new record inserts.
 
 <br/>
 3. Run the server

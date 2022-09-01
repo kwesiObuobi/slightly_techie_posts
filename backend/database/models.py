@@ -24,10 +24,11 @@ def setup_db(app):
     migrate.init_app(app, db)
 
     """
-    You should uncomment the below code on first run;
-    to get the database freshly setup, and with an initial database record
+    You should uncomment the below code once - on first server run;
+    to get the database freshly setup, and with an initial database record.
     """
     #db_drop_and_create_all()
+    
 
 """
 db_drop_and_create_all()
