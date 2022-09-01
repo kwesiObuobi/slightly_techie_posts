@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort
+from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 from database.models import setup_db, Post
 
@@ -9,6 +9,30 @@ setup_db(app)
 @app.route('/')
 def index():
     return "Smiley me => :)"
+
+
+@app.route('/posts', methods=['POST'])
+def create_post():
+    body = request.get_json()
+
+    new_title = body.get('title', None)
+    new_text = body.get('text', None)
+
+    try:
+        post = Post(title = new_title, text = new_text)
+        post.insert()
+
+        posts  = [post.format() for post in Post.query.order_by(Post.post_id).all()]
+
+        return jsonify({
+            'success': True,
+            'created_post_id': post.post_id,
+            'posts': posts,
+            'total_posts': len(posts)
+        })
+    except:
+        abort(422)
+
 
 @app.route('/posts')
 def get_posts():
@@ -36,6 +60,12 @@ def get_specific_post(post_id):
             })
     except Exception as e:
         print(e)
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
