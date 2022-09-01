@@ -135,15 +135,16 @@ def get_specific_post(post_id):
                 'success': True,
                 'post': post.format()
             })
+
     except Exception as e:
-        print(e)
+        abort(404)
 
 
 """
 Error handlers for all expected errors
 """
 @app.errorhandler(400)
-def bad_request():
+def bad_request(error):
     return jsonify({
         'success': False,
         'error': 400,
@@ -151,7 +152,7 @@ def bad_request():
     }), 400
 
 @app.errorhandler(404)
-def not_found():
+def not_found(error):
     return jsonify({
         'success': False,
         'error': 404,
@@ -159,7 +160,7 @@ def not_found():
     }), 404
 
 @app.errorhandler(405)
-def not_found():
+def not_found(error):
     return jsonify({
         'success': False,
         'error': 405,
@@ -167,7 +168,7 @@ def not_found():
     }), 405
 
 @app.errorhandler(422)
-def unprocessable():
+def unprocessable(error):
     return jsonify({
         'success': False,
         'error': 422,
@@ -175,7 +176,7 @@ def unprocessable():
     }), 422
 
 @app.errorhandler(500)
-def not_found():
+def not_found(error):
     return jsonify({
         'success': False,
         'error': 500,
