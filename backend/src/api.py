@@ -136,7 +136,7 @@ def get_specific_post(post_id):
                 'post': post.format()
             })
 
-    except Exception as e:
+    except:
         abort(404)
 
 
